@@ -24,7 +24,7 @@ global:
     terminal: false
     monitoring: false
   portPolicy: "development"
-  imageSource: "registry"
+  imageSource: "local"
   monitoring:
     enabled: false
     provider: otlp

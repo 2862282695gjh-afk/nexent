@@ -20,7 +20,12 @@ spec:
         checksum/nexent-sql: {{ dig "rolloutChecksums" "sql" "" .Values.global | quote }}
     spec:
 
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+      {{- end }}
       containers:
+
         - name: postgresql
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}

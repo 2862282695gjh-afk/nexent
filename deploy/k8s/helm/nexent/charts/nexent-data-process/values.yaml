@@ -19,3 +19,7 @@ config:
   skipProxy: "true"
   pythonPath: "/opt/backend"
   dockerEnvironment: "false"
+
+# 钉到打了 role=dataprocess 标签的节点(hostPath 数据不漂移)
+nodeSelector:
+  role: "dataprocess"

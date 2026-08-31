@@ -28,7 +28,12 @@ spec:
         checksum/nexent-backend-image: {{ dig "rolloutChecksums" "backendImage" "" .Values.global | quote }}
         checksum/nexent-sql: {{ dig "rolloutChecksums" "sql" "" .Values.global | quote }}
     spec:
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+      {{- end }}
       containers:
+
         - name: nexent-northbound
           image: "{{ .Values.images.backend.repository }}:{{ .Values.images.backend.tag }}"
           imagePullPolicy: {{ .Values.images.backend.pullPolicy }}

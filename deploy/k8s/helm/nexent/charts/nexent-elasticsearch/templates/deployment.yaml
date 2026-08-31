@@ -45,7 +45,12 @@ spec:
             runAsUser: 0
             runAsGroup: 0
             privileged: true
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+      {{- end }}
       containers:
+
         - name: elasticsearch
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}

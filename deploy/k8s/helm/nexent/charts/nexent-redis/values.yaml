@@ -23,3 +23,7 @@ persistence:
     - ReadWriteMany
   localPath: "/var/lib/nexent-data/nexent-redis"
   existingClaim: ""
+
+# 钉到打了 role=data 标签的节点(hostPath 数据不漂移)
+nodeSelector:
+  role: "data"

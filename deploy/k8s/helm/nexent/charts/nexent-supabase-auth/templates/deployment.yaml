@@ -38,7 +38,12 @@ spec:
               sleep 2
               done
             - echo "Database is ready"
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+      {{- end }}
       containers:
+
         - name: supabase-auth
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}

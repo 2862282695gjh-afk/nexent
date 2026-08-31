@@ -22,7 +22,12 @@ spec:
         checksum/nexent-env: {{ dig "rolloutChecksums" "env" "" .Values.global | quote }}
         checksum/nexent-web-image: {{ dig "rolloutChecksums" "webImage" "" .Values.global | quote }}
     spec:
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+      {{- end }}
       containers:
+
         - name: nexent-web
           image: "{{ .Values.images.web.repository }}:{{ .Values.images.web.tag }}"
           imagePullPolicy: {{ .Values.images.web.pullPolicy }}

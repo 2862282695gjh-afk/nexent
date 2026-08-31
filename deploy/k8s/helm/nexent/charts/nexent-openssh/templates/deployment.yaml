@@ -21,7 +21,12 @@ spec:
         checksum/nexent-env: {{ dig "rolloutChecksums" "env" "" .Values.global | quote }}
         checksum/nexent-ssh-image: {{ dig "rolloutChecksums" "sshImage" "" .Values.global | quote }}
     spec:
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+      {{- end }}
       containers:
+
         - name: openssh-server
           image: {{ .Values.images.openssh.repository }}:{{ .Values.images.openssh.tag }}
           imagePullPolicy: {{ .Values.images.openssh.pullPolicy }}

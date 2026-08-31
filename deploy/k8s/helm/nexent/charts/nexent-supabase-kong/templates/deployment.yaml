@@ -21,7 +21,12 @@ spec:
       annotations:
         checksum/nexent-supabase-secret: {{ dig "rolloutChecksums" "supabaseSecret" "" .Values.global | quote }}
     spec:
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+      {{- end }}
       containers:
+
         - name: kong
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}

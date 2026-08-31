@@ -29,7 +29,12 @@ spec:
         checksum/nexent-sql: {{ dig "rolloutChecksums" "sql" "" .Values.global | quote }}
     spec:
       serviceAccountName: {{ .Values.serviceAccount.name }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+      {{- end }}
       containers:
+
         - name: nexent-config
           image: "{{ .Values.images.backend.repository }}:{{ .Values.images.backend.tag }}"
           imagePullPolicy: {{ .Values.images.backend.pullPolicy }}

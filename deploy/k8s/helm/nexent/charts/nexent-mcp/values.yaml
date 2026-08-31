@@ -18,3 +18,7 @@ resources:
 config:
   skipProxy: "true"
   umask: "0022"
+
+# 钉到打了 role=dataprocess 标签的节点(hostPath 数据不漂移)
+nodeSelector:
+  role: "dataprocess"

@@ -19,7 +19,12 @@ spec:
       annotations:
         checksum/nexent-env: {{ dig "rolloutChecksums" "env" "" .Values.global | quote }}
     spec:
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+      {{- end }}
       containers:
+
         - name: minio
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}

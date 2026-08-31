@@ -29,3 +29,7 @@ config:
   diskWatermarkLow: "85%"
   diskWatermarkHigh: "90%"
   diskWatermarkFloodStage: "95%"
+
+# 钉到打了 role=data 标签的节点(hostPath 数据不漂移)
+nodeSelector:
+  role: "data"

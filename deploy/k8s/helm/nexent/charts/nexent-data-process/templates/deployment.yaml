@@ -25,7 +25,12 @@ spec:
         checksum/nexent-data-process-image: {{ dig "rolloutChecksums" "dataProcessImage" "" .Values.global | quote }}
         checksum/nexent-sql: {{ dig "rolloutChecksums" "sql" "" .Values.global | quote }}
     spec:
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+      {{- end }}
       containers:
+
         - name: nexent-data-process
           image: "{{ .Values.images.dataProcess.repository }}:{{ .Values.images.dataProcess.tag }}"
           imagePullPolicy: {{ .Values.images.dataProcess.pullPolicy }}
